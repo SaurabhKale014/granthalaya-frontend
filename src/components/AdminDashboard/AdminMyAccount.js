@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Reusable EditableField component (can be moved to a shared folder later)
 const EditableField = ({ label, value, name, onChange, isEditing }) => {
@@ -26,7 +26,7 @@ const AdminMyAccount = ({ user, api, onLogout }) => {
     first_name: '', last_name: '', contact_no: '', address: '',
   });
   const [isUpdating, setIsUpdating] = useState(false);
-  const fileInputRef = useRef(null);
+//   const fileInputRef = useRef(null);
 
   // Fetch the admin's own profile data on component mount
   useEffect(() => {
