@@ -1,0 +1,83 @@
+/* src/components/UserDashboard/UserDashboard.css */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@700&display=swap');
+
+/* Define color and layout variables */
+:root {
+  --primary-color: #4e73df;
+  --light-blue-bg: #4568dc;
+  --dark-blue-bg: #224abe;
+  --secondary-color: #858796;
+  --light-bg: #f8f9fc;
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 90px;
+  /* ✅ ADDED: Variable for the collapsed sidebar's left margin */
+  --sidebar-collapsed-left-margin: 20px;
+}
+
+/* Main container for the entire dashboard */
+.user-dashboard {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--light-bg);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Main content area that holds the top bar and the dynamic content */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--sidebar-width); /* Space for the expanded sidebar */
+  transition: padding-left 0.4s ease-in-out;
+}
+
+/* ✅ CORRECTED: Main content padding when sidebar is collapsed */
+.main-content.collapsed {
+  /* The new padding is the width of the collapsed bar PLUS its left margin */
+  padding-left: calc(var(--sidebar-collapsed-width) + var(--sidebar-collapsed-left-margin));
+}
+
+/* The area where the different sections are rendered */
+.content-area {
+  flex: 1;
+  padding: 25px;
+  overflow-y: auto;
+}
+
+/* Generic card style */
+.content-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  padding: 25px;
+  margin-bottom: 25px;
+}
+
+/* Calendar popup styles */
+.calendar-popup {
+  position: absolute;
+  top: 65px; /* Position below the topbar */
+  right: 25px;
+  z-index: 1050;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
+
+/* Overriding default react-calendar styles to match our theme */
+.react-calendar {
+  border: none !important;
+  font-family: 'Segoe UI', sans-serif !important;
+}
+
+.react-calendar__tile--active {
+  background: var(--primary-color) !important;
+  color: white !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-content, .main-content.collapsed {
+    padding-left: 0;
+  }
+}

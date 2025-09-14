@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Granthalaya - Page Previews</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4e54c8;
+            --primary-dark: #3f43a9;
+            --secondary: #ff8a00;
+            --light: #f5f7ff;
+            --dark: #2c2c54;
+            --gray: #7b88a8;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0 30px;
+            color: var(--dark);
+        }
+
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .preview {
+            width: 350px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .preview:hover {
+            transform: translateY(-5px);
+        }
+
+        .preview-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .preview-content {
+            padding: 20px;
+            min-height: 400px;
+            background: #f8f9fa;
+        }
+
+        .login-preview {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .brand {
+            text-align: center;
+        }
+
+        .brand h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .login-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .dashboard-header {
+            background: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .sidebar {
+            width: 70px;
+            background: var(--dark);
+            height: 250px;
+            float: left;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+
+        .menu-item {
+            color: white;
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-item i {
+            margin-bottom: 5px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .stat {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .content-table {
+            width: 100%;
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .table-header {
+            background: var(--light);
+            padding: 10px;
+            font-weight: bold;
+            border-bottom: 1px solid #eee;
+        }
+
+        .table-row {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .badge {
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+        }
+
+        .badge-success {
+            background: #e6f4ee;
+            color: var(--success);
+        }
+
+        .badge-warning {
+            background: #fff8e1;
+            color: var(--warning);
+        }
+
+        .badge-danger {
+            background: #fdeaea;
+            color: var(--danger);
+        }
+
+        .recommended {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .book {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            flex: 1;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .book-cover {
+            height: 70px;
+            background: #ddd;
+            border-radius: 3px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Granthalaya Library System - Page Previews</h1>
+        
+        <div class="preview-container">
+            <!-- Login Page Preview -->
+            <div class="preview">
+                <div class="preview-header">Login Page</div>
+                <div class="preview-content">
+                    <div class="login-preview">
+                        <div class="brand">
+                            <h2>GRANTHALAYA</h2>
+                            <p>Library Management System</p>
+                        </div>
+                    </div>
+                    <div class="login-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password">
+                        </div>
+                        <button class="btn">Login</button>
+                        <div style="text-align: center; margin-top: 10px;">
+                            <a href="#" style="color: var(--primary); font-size: 0.9rem;">Forgot password?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard Preview -->
+            <div class="preview">
+                <div class="preview-header">Admin Dashboard</div>
+                <div class="preview-content">
+                    <div class="dashboard-header">
+                        <div>Admin Dashboard</div>
+                        <div class="user-profile">
+                            <div class="user-avatar">A</div>
+                            <div>Admin User</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 15px;">
+                        <div class="sidebar">
+                            <div class="menu-item">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="menu-item">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="menu-item">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="menu-item">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                        </div>
+                        
+                        <div style="overflow: hidden;">
+                            <div class="stats">
+                                <div class="stat">
+                                    <div class="stat-number">2,548</div>
+                                    <div class="stat-label">Total Books</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">324</div>
+                                    <div class="stat-label">Members</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">86</div>
+                                    <div class="stat-label">Issued Today</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">12</div>
+                                    <div class="stat-label">Overdue</div>
+                                </div>
+                            </div>
+                            
+                            <div class="content-table">
+                                <div class="table-header">Recent Transactions</div>
+                                <div class="table-row">
+                                    <div>John Doe</div>
+                                    <div><span class="badge badge-success">Returned</span></div>
+                                </div>
+                                <div class="table-row">
+                                    <div>Jane Smith</div>
+                                    <div><span class="badge badge-warning">Issued</span></div>
+                                </div>
+                                <div class="table-row">
+                                    <div>Robert Johnson</div>
+                                    <div><span class="badge badge-danger">Overdue</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Dashboard Preview -->
+            <div class="preview">
+                <div class="preview-header">User Dashboard</div>
+                <div class="preview-content">
+                    <div class="dashboard-header">
+                        <div>User Dashboard</div>
+                        <div class="user-profile">
+                            <div class="user-avatar">J</div>
+                            <div>John Doe</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 15px;">
+                        <div class="sidebar">
+                            <div class="menu-item">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="menu-item">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="menu-item">
+                                <i class="fas fa-list"></i>
+                            </div>
+                            <div class="menu-item">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        
+                        <div style="overflow: hidden;">
+                            <div class="stats">
+                                <div class="stat">
+                                    <div class="stat-number">5</div>
+                                    <div class="stat-label">Borrowed</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">12</div>
+                                    <div class="stat-label">Returned</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">2</div>
+                                    <div class="stat-label">Requests</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">1</div>
+                                    <div class="stat-label">Overdue</div>
+                                </div>
+                            </div>
+                            
+                            <div class="content-table">
+                                <div class="table-header">Currently Borrowed</div>
+                                <div class="table-row">
+                                    <div>The Alchemist</div>
+                                    <div><span class="badge badge-warning">Borrowed</span></div>
+                                </div>
+                                <div class="table-row">
+                                    <div>Thinking, Fast and Slow</div>
+                                    <div><span class="badge badge-danger">Overdue</span></div>
+                                </div>
+                            </div>
+                            
+                            <div class="recommended">
+                                <div class="book">
+                                    <div class="book-cover"></div>
+                                    <div>Sapiens</div>
+                                </div>
+                                <div class="book">
+                                    <div class="book-cover"></div>
+                                    <div>Atomic Habits</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
